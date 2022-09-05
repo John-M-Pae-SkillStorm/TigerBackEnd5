@@ -90,7 +90,7 @@ namespace TigerBackEnd5.Controllers
         }
 
         [HttpPost("{id}/Plan")]
-        public async Task<ActionResult<User>> CreatePlanForUser(int userId, Plan plan)
+        public async Task<ActionResult<User>> CreatePlanForUser(int userId, AddPlan newPlan)
         {
             User? user = await _context.Users
                 .Where(u => u.Id == userId)
@@ -98,6 +98,7 @@ namespace TigerBackEnd5.Controllers
                 .FirstOrDefaultAsync();
             if (user == null) { return NotFound(); }
 
+            Plan plan = await newPlan.ToDataModel(_context);
             _context.Plans.Add(plan);
             user.Plans.Add(plan);
 
