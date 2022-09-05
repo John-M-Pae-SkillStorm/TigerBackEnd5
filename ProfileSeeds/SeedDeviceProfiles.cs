@@ -9,15 +9,22 @@ namespace TigerBackEnd5.ProfileSeeds
             new DeviceProfile
             {
                 Id = 1,
-                Type = "Smart Fridge",
-                Model = "2a347b",
-                DevicePrice = 1000,
+                Type = "Apple I-Phone 29",
+                Model = "hrc10000",
+                DevicePrice = 1300,
             },
             new DeviceProfile
             {
                 Id = 2,
-                Type = "Samsung Galaxy",
-                Model = "S9",
+                Type = "Garmin Smart-Watch x2000",
+                Model = "DJT450",
+                DevicePrice = 600
+            },
+            new DeviceProfile
+            {
+                Id = 2,
+                Type = "Samsung 55-inch Tablet Z",
+                Model = "bHo4470",
                 DevicePrice = 600
             }
         };
