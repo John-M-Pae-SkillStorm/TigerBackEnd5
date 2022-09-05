@@ -20,6 +20,14 @@ namespace TigerBackEnd5.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetAll()
+        {
+            return await _context.Users
+                .Include(u => u.Plans)
+                .ToListAsync();
+        }
+
         [HttpGet("Plans")]
         public async Task<ActionResult<IEnumerable<PlanProfile>>> GetAllPlans()
         {
