@@ -67,6 +67,16 @@ namespace TigerBackEnd5.Controllers
             return TargetUser;
         }
 
+        [HttpGet("{id}/Plans")]
+        public async Task<ActionResult<IEnumerable<Plan>>> GetUserPlans(int userId)
+        {
+            return await _context
+                .Plans
+                .Where(p => p.UserId == userId)
+                .Include(p => p.Devices)
+                .ToListAsync();
+        }
+
         [HttpPost]
         public async Task<ActionResult<User>> CreateNewUser(CreateUser newUser)
         {
