@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TigerBackEnd5.Data;
 
@@ -11,9 +12,10 @@ using TigerBackEnd5.Data;
 namespace TigerBackEnd5.Migrations
 {
     [DbContext(typeof(TigerContext))]
-    partial class TigerContextModelSnapshot : ModelSnapshot
+    [Migration("20220905174150_1241")]
+    partial class _1241
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
