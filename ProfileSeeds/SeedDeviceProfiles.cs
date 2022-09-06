@@ -22,7 +22,7 @@ namespace TigerBackEnd5.ProfileSeeds
             },
             new DeviceProfile
             {
-                Id = 2,
+                Id = 3,
                 Type = "Samsung 55-inch Tablet Z",
                 Model = "bHo4470",
                 DevicePrice = 600
