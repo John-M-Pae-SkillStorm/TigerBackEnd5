@@ -23,9 +23,19 @@ namespace TigerBackEnd5.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
-            return await _context.Users
+            List<User> listOfUsers = await _context.Users
                 .Include(u => u.Plans)
                 .ToListAsync();
+
+            foreach (var user in listOfUsers)
+            {
+                foreach (var plan in user.Plans)
+                {
+                    plan.Profile = await _context.PlanProfiles.FindAsync(plan.PlanProfileId);
+                }
+            }
+
+            return listOfUsers;
         }
 
         [HttpGet("Plans")]
@@ -63,6 +73,11 @@ namespace TigerBackEnd5.Controllers
                 .FirstAsync();
 
             if (TargetUser == null) { return NotFound(); }
+
+            foreach (var plan in TargetUser.Plans)
+            {
+                plan.Profile = await _context.PlanProfiles.FindAsync(plan.PlanProfileId);
+            }
 
             return TargetUser;
         }
@@ -131,10 +146,11 @@ namespace TigerBackEnd5.Controllers
 
             var profile = await _context.PlanProfiles.FindAsync(plan.PlanProfileId);
             if (profile == null) { return NotFound(); }
-            //if (profile.DeviceLimit >= plan.Devices.Count)
-            //{
-            //    return Problem("This plan cannot support any more devices.");
-            //}
+            if (profile.DeviceLimit <= plan.Devices.Count)
+            {
+                return Problem("This plan cannot support any more devices.");
+            }
+
 
             _context.Devices.Add(device);
             plan.Devices.Add(device);
@@ -142,5 +158,17 @@ namespace TigerBackEnd5.Controllers
 
             return await GetUserInfo(userId);
         }
+
+        [HttpDelete("{id}")]
+        public async Task RemoveUser() { throw new NotImplementedException(); }
+
+        [HttpDelete("{id}/Plan")]
+        public async Task RemovePlanFromUser() { throw new NotImplementedException(); }
+
+        [HttpDelete("{id}/Device")]
+        public async Task RemoveDeviceFromUserPlan() { throw new NotImplementedException(); }
+
+        [HttpPut("{id}/Device")]
+        public async Task UpdateDeviceNumber() { throw new NotImplementedException(); }
     }
 }
