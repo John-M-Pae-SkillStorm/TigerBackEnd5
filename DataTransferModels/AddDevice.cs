@@ -7,6 +7,6 @@ namespace TigerBackEnd5.DataTransferModels
         public int DeviceProfileId { get; set; }
         public int PhoneNumberDigits { get; set; }
 
-        public Device ToDataModel() { }
+        //public Device ToDataModel() { }
     }
 }
