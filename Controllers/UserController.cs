@@ -131,10 +131,10 @@ namespace TigerBackEnd5.Controllers
 
             var profile = await _context.PlanProfiles.FindAsync(plan.PlanProfileId);
             if (profile == null) { return NotFound(); }
-            if (profile.DeviceLimit >= plan.Devices.Count)
-            {
-                return Problem("This plan cannot support any more devices.");
-            }
+            //if (profile.DeviceLimit >= plan.Devices.Count)
+            //{
+            //    return Problem("This plan cannot support any more devices.");
+            //}
 
             _context.Devices.Add(device);
             plan.Devices.Add(device);

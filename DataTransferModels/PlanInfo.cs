@@ -9,7 +9,7 @@ namespace TigerBackEnd5.DataTransferModels
         public int ProfileId { get; }
         public string PlanName { get; }
         public int PlanPrice { get; }
-        public int DeviceLimit { get; }
+        //public int DeviceLimit { get; }
         public ICollection<Device> Devices { get; set; }
         public PlanInfo(Plan plan, PlanProfile profile)
         {
@@ -17,7 +17,7 @@ namespace TigerBackEnd5.DataTransferModels
             ProfileId = plan.PlanProfileId;
             PlanName = profile.PlanName;
             PlanPrice = profile.PlanPrice;
-            DeviceLimit = profile.DeviceLimit;
+            //DeviceLimit = profile.DeviceLimit;
             Devices = plan.Devices;
         }
     }

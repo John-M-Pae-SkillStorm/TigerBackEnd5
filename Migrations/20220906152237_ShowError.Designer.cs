@@ -12,8 +12,8 @@ using TigerBackEnd5.Data;
 namespace TigerBackEnd5.Migrations
 {
     [DbContext(typeof(TigerContext))]
-    [Migration("20220905040802_initaialization")]
-    partial class initaialization
+    [Migration("20220906152237_ShowError")]
+    partial class ShowError
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
