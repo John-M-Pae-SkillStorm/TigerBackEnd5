@@ -68,13 +68,21 @@ namespace TigerBackEnd5.Controllers
         }
 
         [HttpGet("{id}/Plans")]
-        public async Task<ActionResult<IEnumerable<Plan>>> GetUserPlans(int userId)
+        public async Task<ActionResult<IEnumerable<PlanInfo>>> GetUserPlans(int userId)
         {
-            return await _context
+            var plans = await _context
                 .Plans
                 .Where(p => p.UserId == userId)
                 .Include(p => p.Devices)
                 .ToListAsync();
+            var result = new List<PlanInfo>();
+            foreach (var plan in plans)
+            {
+                var profile = await _context.PlanProfiles.FindAsync(plan.PlanProfileId);
+                result.Add(new PlanInfo(plan, profile));
+            }
+
+            return result;
         }
 
         [HttpPost]
