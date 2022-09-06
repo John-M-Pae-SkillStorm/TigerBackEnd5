@@ -12,8 +12,8 @@ using TigerBackEnd5.Data;
 namespace TigerBackEnd5.Migrations
 {
     [DbContext(typeof(TigerContext))]
-    [Migration("20220905161422_add-fields-to-plans")]
-    partial class addfieldstoplans
+    [Migration("20220906152422_ShowError2")]
+    partial class ShowError2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,9 +123,6 @@ namespace TigerBackEnd5.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("DeviceLimit")
-                        .HasColumnType("int");
-
                     b.Property<string>("PlanName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -136,29 +133,6 @@ namespace TigerBackEnd5.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PlanProfiles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DeviceLimit = 4,
-                            PlanName = "Cub",
-                            PlanPrice = 10
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DeviceLimit = 8,
-                            PlanName = "Leopard",
-                            PlanPrice = 20
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DeviceLimit = 12,
-                            PlanName = "Tiger",
-                            PlanPrice = 30
-                        });
                 });
 
             modelBuilder.Entity("TigerBackEnd5.Models.User", b =>

@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourcegroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/tigerbackend8dbserver/databases/TigerBackEnd8DB",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:DefaultConnection",
+      "dynamicId": null
+    },
+    "apis2": {
+      "apiEndpoint": "https://tigerbackend8api.azure-api.net/",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/TigerBackEnd8api/apis/TigerBackEnd8",
+      "type": "apis.azure"
+    },
+    "mssql1": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:LocalConnection"
+    }
+  }
+}

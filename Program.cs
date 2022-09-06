@@ -23,7 +23,7 @@ namespace TigerBackEnd5
             // Add database context
             builder.Services.AddDbContext<TigerContext>(opts =>
                 opts.UseSqlServer(
-                    builder.Configuration.GetConnectionString("LocalConnection"))
+                    builder.Configuration.GetConnectionString("DefaultConnection"))
             );
 
             // Add services to the container.
@@ -38,9 +38,10 @@ namespace TigerBackEnd5
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                
             }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 

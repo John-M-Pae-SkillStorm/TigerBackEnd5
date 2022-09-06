@@ -4,7 +4,7 @@
 
 namespace TigerBackEnd5.Migrations
 {
-    public partial class InitialDR1 : Migration
+    public partial class ShowError2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
