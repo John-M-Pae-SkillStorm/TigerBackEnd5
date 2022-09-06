@@ -160,7 +160,17 @@ namespace TigerBackEnd5.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task RemoveUser() { throw new NotImplementedException(); }
+        public async Task RemoveUser(int userId)
+        {
+            User target = await _context.Users
+                .Where(u => u.Id == userId)
+                .Include(u => u.Plans)
+                .FirstOrDefaultAsync();
+
+            _context.Users.Remove(target);
+
+            await _context.SaveChangesAsync();
+        }
 
         [HttpDelete("{id}/Plan")]
         public async Task RemovePlanFromUser() { throw new NotImplementedException(); }
