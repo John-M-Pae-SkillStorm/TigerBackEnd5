@@ -160,7 +160,7 @@ namespace TigerBackEnd5.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task RemoveUser(int userId)
+        public async Task<ActionResult> RemoveUser(int userId)
         {
             User target = await _context.Users
                 .Where(u => u.Id == userId)
@@ -170,13 +170,51 @@ namespace TigerBackEnd5.Controllers
             _context.Users.Remove(target);
 
             await _context.SaveChangesAsync();
+
+            return Ok("User Deleted");
         }
 
         [HttpDelete("{id}/Plan")]
-        public async Task RemovePlanFromUser() { throw new NotImplementedException(); }
+        public async Task<ActionResult<User>> RemovePlanFromUser(int userId, int planId)
+        {
+            User host = await _context.Users
+                .Where(u => u.Id == userId)
+                .Include(u => u.Plans)
+                .FirstOrDefaultAsync();
+
+            Plan target = await _context.Plans
+                .Where(p => p.Id == planId)
+                .Include(p => p.Devices)
+                .FirstOrDefaultAsync();
+
+            _context.Plans.Remove(target);
+            host.Plans.Remove(target);
+
+            await _context.SaveChangesAsync();
+
+            return host;
+        }
 
         [HttpDelete("{id}/Device")]
-        public async Task RemoveDeviceFromUserPlan() { throw new NotImplementedException(); }
+        public async Task<ActionResult<Plan>> RemoveDeviceFromUserPlan(int planId, int deviceId)
+        {
+            Plan host = await _context.Plans
+                .Where(p => p.Id == planId)
+                .Include(p => p.Devices)
+                .FirstOrDefaultAsync();
+
+            Device target = await _context.Devices
+                .Where(d => d.Id == deviceId)
+                .Include(d => d.PhoneNumberId)
+                .FirstOrDefaultAsync();
+
+            _context.Devices.Remove(target);
+            host.Devices.Remove(target);
+
+            await _context.SaveChangesAsync();
+
+            return host;
+        }
 
         [HttpPut("{id}/Device")]
         public async Task UpdateDeviceNumber() { throw new NotImplementedException(); }
